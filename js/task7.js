@@ -5,7 +5,6 @@ const Transaction = {
 
 const account = {
   balance: 0,
-
   transactions: [],
 
   createTransaction(amount, type) {
