@@ -17,17 +17,18 @@ const account = {
     transaction.amount = amount;
     transaction.id = this.transactions.length + 1;
 
-    return this.transactions.push(transaction);
+    this.transactions.push(transaction);
+    return true;
   },
 
   deposit(amount) {
-    this.createTransaction(amount, this.DEPOSIT);
+    this.createTransaction(amount, Transaction.DEPOSIT);
     return (this.balance += amount);
   },
 
   withdraw(amount) {
-    let transaction = this.createTransaction(amount, Transaction.WITHDRAW);
-    this.transactions.push(transaction);
+    this.createTransaction(amount, Transaction.WITHDRAW);
+
     if (amount > this.balance) {
       return 'недостаточно средств';
     } else {
