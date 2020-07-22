@@ -16,18 +16,18 @@ const account = {
     }
     transaction.amount = amount;
     transaction.id = this.transactions.length + 1;
-
-    this.transactions.push(transaction);
-    return true;
+    return transaction;
   },
 
   deposit(amount) {
-    this.createTransaction(amount, Transaction.DEPOSIT);
+    this.transactions.push(this.createTransaction(amount, Transaction.DEPOSIT));
     return (this.balance += amount);
   },
 
   withdraw(amount) {
-    this.createTransaction(amount, Transaction.WITHDRAW);
+    this.transactions.push(
+      this.createTransaction(amount, Transaction.WITHDRAW),
+    );
 
     if (amount > this.balance) {
       return 'недостаточно средств';
@@ -52,7 +52,7 @@ const account = {
   getTransactionTotal(type) {
     let result = [];
     for (const transaction of this.transactions) {
-      if (type == Transaction.DEPOSIT || type == Transaction.WITHDRAW) {
+      if (type === transaction.type) {
         result.push(transaction);
       }
     }
